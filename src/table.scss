@@ -1,0 +1,48 @@
+div[role=row] {
+	// border-top: 1px solid black;
+	// border-bottom: 1px solid black;
+	background-color: rgb(208, 202, 202);
+}
+
+.t-header {
+	border: none;
+	background-color: none;
+
+}
+
+.table {
+	box-sizing: border-box;
+	overflow: auto;
+	border: 1px solid black;
+	position: relative;
+	height: 100vh;
+	scroll-behavior: smooth;
+	// -webkit-backface-visibility: hidden;
+	// -webkit-perspective: 1000;
+	-webkit-overflow-scrolling: auto;
+}
+
+.table .header-container{
+	display: flex;
+	display: -webkit-box;
+	white-space: nowrap;
+	height: 30px;
+	width: 100%;
+	position: relative;
+	border: 1px solid black;
+}
+
+.ag-header-row {
+	position: absolute;
+	top: 0px;
+	width: 100%;
+}
+
+.ag-header-cell{
+	position: absolute;
+	color: black;
+}
+
+.t-0{
+	top:0
+}

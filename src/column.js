@@ -1,0 +1,49 @@
+import HeaderCell from "./Cells/HeaderCell";
+
+export const column = [
+	{
+		key:"title",
+		name:"title",
+		width:180,
+		cellClass:"",
+		editable:"true",
+		cellType:"Input",
+		headerRender:HeaderCell
+	},
+	{
+		key:"area",
+		name:"area",
+		width:180,
+		cellClass:"",
+		editable:"true",
+		cellType:"Input",
+		headerRender:HeaderCell
+	},
+	{
+		key:"id",
+		name:"id",
+		width:180,
+		cellClass:"",
+		editable:"true",
+		cellType:"Input",
+		headerRender:HeaderCell
+	},
+	{
+		key:"available",
+		name:"available",
+		width:180,
+		cellClass:"",
+		editable:"true",
+		cellType:"Input",
+		headerRender:HeaderCell
+	},
+	{
+		key:"version",
+		name:"version",
+		width:180,
+		cellClass:"",
+		editable:"true",
+		cellType:"Input",
+		headerRender:HeaderCell
+	}
+]
