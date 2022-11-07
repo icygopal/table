@@ -7,6 +7,7 @@ const Row = (props) => {
 	  row,
 	  viewportColumns,
 	  rowClass,
+	  top,
 	  height
 	} = props
 
@@ -16,6 +17,7 @@ const Row = (props) => {
 	for (let index = 0; index < viewportColumns.length; index++) {
 	  const column = viewportColumns[index];
 	  const { idx } = column;
+	  console.log({left: column.left})
 	  const style = { width: column.width, left: column.left }
 		cells.push(
 		  <Cell
@@ -31,7 +33,8 @@ const Row = (props) => {
 		<>
 			<div
 				role="row"
-				style={{height:height}}
+				className="item"
+				style={{height:height,top:top}}
 			>{cells}
 			</div>
 		</>

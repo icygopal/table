@@ -136,6 +136,7 @@ const useCalculatedColumns = ({
 	  const colOverscanEndIdx =  Math.min(lastColIdx, colVisibleEndIdx + 1);
   
 	  return [colOverscanStartIdx, colOverscanEndIdx];
+	  columnMetrics
 	}, [
 	  columnMetrics,
 	  columns,

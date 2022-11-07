@@ -3,6 +3,7 @@ import data from './Data'
 import Row from './Table/Components/Row'
 import { column } from './column'
 import { useRef } from 'react'
+import DataGridTable from './Table/DataGridTable'
 function App() {
 	const gridref = useRef(null)
 	// const row = []
@@ -14,7 +15,9 @@ function App() {
 	return (
 		<div
 		>
-			<Table ref={gridref} columns={column} rows={data}/>
+			
+			<DataGridTable itemheight={30} columns={column} rows={data}/>
+			{/* <Table ref={gridref} columns={column} rows={data}/> */}
 		</div>
 
 	)

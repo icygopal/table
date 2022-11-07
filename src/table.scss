@@ -23,26 +23,74 @@ div[role=row] {
 }
 
 .table .header-container{
-	display: flex;
-	display: -webkit-box;
 	white-space: nowrap;
 	height: 30px;
 	width: 100%;
 	position: relative;
 	border: 1px solid black;
 }
-
-.ag-header-row {
-	position: absolute;
-	top: 0px;
-	width: 100%;
+.viewPort .header-container{
+	position: sticky;
+	top: 0;
+	z-index: 34;
+	
 }
+.viewPort .ag-header-row{
+	position: relative;
+	width: 100%;
+	background: black;
+}
+// .ag-header-row {
+// 	position: absolute;
+// 	top: 0px;
+// 	width: 100%;
+// }
 
 .ag-header-cell{
 	position: absolute;
-	color: black;
 }
 
 .t-0{
 	top:0
 }
+
+.pp-row{
+	display: flex;
+}
+
+.viewPort {
+	position: relative;
+	width: 510px;
+	height: 500px;
+	border: solid 1px;
+	overflow-y: scroll;
+  }
+  
+  .itemContainer {
+	position: absolute;
+	width: 500px;
+	background-color: azure;
+  
+  }
+  .addContainer {
+	position: sticky;
+	top: 0;
+	width: 500px;
+	background-color: black;
+	z-index: 10
+  }
+  
+  .item {
+	position: absolute;
+	background-color: beige;
+	border: solid 1px;
+	width: 500px;
+	text-align:center;
+	border-bottom: 1px solid black;
+  }
+  
+  .done {
+	color: rgba(0, 0, 0, 0.3);
+	text-decoration: line-through;
+  }
+  
