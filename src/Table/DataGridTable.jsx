@@ -83,7 +83,7 @@ const DataGridTable = ({
 		const row = rawRows[i];
 		if(row){
 			result.push(defaultRowRenderer(i, {
-				i,
+				rowIdx:i,
 				row,
 				viewportColumns,
 				rowClass:"abc",
@@ -96,7 +96,7 @@ const DataGridTable = ({
 	}
 	return (
 		<>
-		<div ref={tableRef} className="viewPort" onScroll={scollPos} >
+		<div ref={tableRef} className="viewPort" style={{height:"calc(100vh - 275px)"}} onScroll={scollPos} >
 		<Header
 			columns={viewportColumns}
 			/>

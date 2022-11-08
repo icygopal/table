@@ -4,7 +4,7 @@ import { clampColumnWidth } from '../../CommonFunctions'
 const HeaderCell = (props) => {
 	const {style,column,key} = props
   return (
-	<div key={key} className="ag-header-cell" style={style}>{column.name}</div>
+	<div key={key} className="cstm-header-cell" style={style}>{column.name}</div>
   )
 }
 

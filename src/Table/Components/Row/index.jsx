@@ -14,13 +14,17 @@ const Row = (props) => {
 	
 	const cells = [];
 
+
+
 	for (let index = 0; index < viewportColumns.length; index++) {
 	  const column = viewportColumns[index];
 	  const { idx } = column;
+		console.log({rowIdx,index})
 	  console.log({left: column.left})
 	  const style = { width: column.width, left: column.left }
 		cells.push(
 		  <Cell
+			selectedCell={(rowIdx===0 && index===0)  && "selected-cell" }
 			key={column.key}
 			column={column}
 			row={row}

@@ -1,7 +1,7 @@
 div[role=row] {
 	// border-top: 1px solid black;
 	// border-bottom: 1px solid black;
-	background-color: rgb(208, 202, 202);
+	// background-color: rgb(208, 202, 202);
 }
 
 .t-header {
@@ -17,8 +17,6 @@ div[role=row] {
 	position: relative;
 	height: 100vh;
 	scroll-behavior: smooth;
-	// -webkit-backface-visibility: hidden;
-	// -webkit-perspective: 1000;
 	-webkit-overflow-scrolling: auto;
 }
 
@@ -29,13 +27,7 @@ div[role=row] {
 	position: relative;
 	border: 1px solid black;
 }
-.viewPort .header-container{
-	position: sticky;
-	top: 0;
-	z-index: 34;
-	
-}
-.viewPort .ag-header-row{
+.main-layout .ag-header-row{
 	position: relative;
 	width: 100%;
 	background: black;
@@ -45,9 +37,26 @@ div[role=row] {
 // 	top: 0px;
 // 	width: 100%;
 // }
+.header-container {
+.cstm-header-cell {
+	position: absolute;
+	border-right: 1px solid #f1f4f8;
+    line-height: 22px;
+    height: 30px;
+    padding: 5px;
+}
+}
 
 .ag-header-cell{
 	position: absolute;
+	border-right: 1px solid #f1f4f8;
+	font-size: 14px;
+	line-height: 20px;
+	height: 30px;
+}
+
+.btns {
+	padding: 5px;
 }
 
 .t-0{
@@ -60,37 +69,54 @@ div[role=row] {
 
 .viewPort {
 	position: relative;
-	width: 510px;
-	height: 500px;
+	width: 100%;
 	border: solid 1px;
 	overflow-y: scroll;
   }
+
+  .header-container{
+	position: sticky;
+	top: 0;
+	z-index: 34;
+	background-color: #f1f4f8;
+	height: 30px;
+	
+}
   
   .itemContainer {
 	position: absolute;
-	width: 500px;
-	background-color: azure;
+	width: 100%;
+	background-color: #fff;
+	// height: 500px !important;
   
   }
   .addContainer {
 	position: sticky;
-	top: 0;
-	width: 500px;
+	top: 47;
+	width: 100%;
 	background-color: black;
-	z-index: 10
+	z-index: 50;
+	top: 30px;
   }
   
   .item {
 	position: absolute;
-	background-color: beige;
-	border: solid 1px;
-	width: 500px;
-	text-align:center;
-	border-bottom: 1px solid black;
+	// background-color: #fff;
+	border: solid 1px #f1f4f8;
+	width: 100%;
+	// text-align:center;
+	// border-bottom: 1px solid #f1f4f8;
   }
   
   .done {
 	color: rgba(0, 0, 0, 0.3);
 	text-decoration: line-through;
+  }
+
+  .selected-cell{
+	box-shadow: rgb(35 131 226 / 57%) 0px 0px 0px 1px inset, rgb(35 131 226 / 35%) 0px 0px 0px 2px;
+	z-index: 1;
+	border: 0;
+	border-radius: 3px;
   }
   
