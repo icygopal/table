@@ -13,12 +13,8 @@ function App() {
 	// 	)
 	// })
 	return (
-		<div
-		>
-			
+		
 			<DataGridTable itemheight={30} columns={column} rows={data}/>
-			{/* <Table ref={gridref} columns={column} rows={data}/> */}
-		</div>
 
 	)
 }

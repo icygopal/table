@@ -8,36 +8,42 @@ const Row = (props) => {
 	  viewportColumns,
 	  rowClass,
 	  top,
-	  height
+	  height,
+	  selectedCellIdx,
+	  selectCell,
+	  selectedPosition
 	} = props
 
 	
 	const cells = [];
 
 
-
+	
 	for (let index = 0; index < viewportColumns.length; index++) {
+		const isCellSelected = selectedCellIdx === index;
 	  const column = viewportColumns[index];
 	  const { idx } = column;
-		console.log({rowIdx,index})
-	  console.log({left: column.left})
 	  const style = { width: column.width, left: column.left }
 		cells.push(
 		  <Cell
-			selectedCell={(rowIdx===0 && index===0)  && "selected-cell" }
 			key={column.key}
 			column={column}
 			row={row}
+			rowIdx={rowIdx} 
 			style={style}
+			isCellSelected={isCellSelected}
+			selectCell={selectCell}
 		  />
 		);
 	}
+	const isGroupRowFocused = selectedPosition.idx === -1 && selectedPosition.rowIdx !== -2;
 
 	return (
 		<>
 			<div
 				role="row"
 				className="item"
+				aria-rowindex={rowIdx}
 				style={{height:height,top:top}}
 			>{cells}
 			</div>

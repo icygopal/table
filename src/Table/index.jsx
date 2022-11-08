@@ -47,7 +47,6 @@ const Table = (props,ref) => {
 	const clientHeight = tableHeight - headerRowHeight
 	const leftKey = 'ArrowLeft';
 	const rightKey = 'ArrowRight';
-	console.log({clientHeight})
 	const {
 		columns,
 		colOverscanStartIdx,
@@ -62,7 +61,6 @@ const Table = (props,ref) => {
 		viewportWidth: tableWidth,
 		scrollLeft,
 	});
-	console.log(rawRows)
 	const {
 		rowOverscanStartIdx,
 		rowOverscanEndIdx,
@@ -134,68 +132,12 @@ const Table = (props,ref) => {
 		}
 	  }
 
-
-// const handleScroll = (event)=>{
-// 	if (event.target != event.currentTarget) return
-// 	const { scrollTop, scrollLeft } = event.currentTarget;
-// 		// console.log(scrollTop)
-// 		console.log("Asdfasd","asdf")
-// 		flushSync(()=>{
-// 			setScrollTop(scrollTop);
-
-// 		})
-// 		//   setScrollLeft(abs(scrollLeft));
-// }
-	  
-
-useEffect(() => {
-
-	const elem = document.querySelector('.table');
-    const handleScroll = event => {
-			const { scrollTop, scrollLeft } = event.currentTarget;
-			flushSync(()=>{
-				setScrollTop(scrollTop)
-			})
-			// setScrollTop(scrollTop);
-
-    //   console.log('window.scrollY',  event.currentTarget.scrollTop);
-    };
-
-    elem.addEventListener('scroll', handleScroll,{ passive: true });
-
-    return () => {
-		elem.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
   function scrollIntoView(element) {
 	element?.scrollIntoView({ inline: 'nearest', block: 'nearest' });
   }
 
-  
-//   useLayoutEffect(() => {
-//       rowRef.current.focus({ preventScroll: true });
-//       scrollIntoView(rowRef.current);
-//   });
-
-
-	useImperativeHandle(ref, () => ({
-		element: tableRef.current,
-		// scrollToColumn,
-		scrollToRow(rowIdx) {
-		  const { current } = tableRef;
-		  if (!current) return;
-		  current.scrollTo({
-			top: getRowTop(rowIdx),
-			behavior: 'smooth'
-		  });
-		},
-		// selectCell
-	  }));
-
 	  const getViewPortRows=()=>{
 		const rowElements= [];
-	console.log("sdfgsdfgsdfg",{rowOverscanStartIdx,rowOverscanEndIdx})
 		const startRowIdx =rowOverscanStartIdx
     	const endRowIdx =rowOverscanEndIdx
 	

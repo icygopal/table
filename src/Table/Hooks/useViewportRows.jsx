@@ -6,12 +6,6 @@ const useViewportRows = ({
 	clientHeight,
 	scrollTop,
 }) => {
-	// debugger
-	console.log({rawRows,
-		rowHeight,
-		clientHeight,
-		scrollTop})
-
 	const { totalRowHeight, getRowTop, findRowIdx } = useMemo(() => {
 		return {
 			totalRowHeight: rowHeight * rawRows.length,
@@ -19,9 +13,6 @@ const useViewportRows = ({
 			findRowIdx: (offset) => Math.floor(offset / rowHeight)
 		};
 	},[])
-	// let rowOverscanStartIdx = 0;
-	// let rowOverscanEndIdx = rawRows.length - 1;
-  console.log(scrollTop)
 		const overscanThreshold = 4;
 		const rowVisibleStartIdx = findRowIdx(scrollTop);
 		const rowVisibleEndIdx = findRowIdx(scrollTop + clientHeight);
@@ -37,6 +28,7 @@ const useViewportRows = ({
 		rowOverscanStartIdx,
 		rowOverscanEndIdx,
 		getRowTop,
+		findRowIdx,
 		totalRowHeight
 	  };
 	}

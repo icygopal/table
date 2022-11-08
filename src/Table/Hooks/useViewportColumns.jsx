@@ -10,8 +10,6 @@ const useViewportColumns = ({
 	rowOverscanEndIdx,
 	columnWidths,
   })=> {
-	console.log()
-	// find the column that spans over a column within the visible columns range and adjust colOverscanStartIdx
 	const startIdx = useMemo(() => {
 	  if (colOverscanStartIdx === 0) return 0;
   

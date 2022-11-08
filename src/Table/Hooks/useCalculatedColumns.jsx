@@ -19,12 +19,12 @@ const useCalculatedColumns = ({
 	const { columns,  lastFrozenColumnIndex } = useMemo(()=> {
 	  let lastFrozenColumnIndex = -1;
   
-	  const columns = rawColumns.map((rawColumn) => {
+	  const columns = rawColumns.map((rawColumn,index) => {
 		const frozen = rawColumn.frozen || false;
   
 		const column = {
 		  ...rawColumn,
-		  idx: 0,
+		  idx: index,
 		  frozen,
 		  isLastFrozenColumn: false,
 		  width: rawColumn.width ?? defaultWidth,
