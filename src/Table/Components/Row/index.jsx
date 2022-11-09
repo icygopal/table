@@ -42,7 +42,7 @@ const Row = (props) => {
 		<>
 			<div
 				role="row"
-				className="item"
+				className="table-row-cell"
 				aria-rowindex={rowIdx}
 				style={{height:height,top:top}}
 			>{cells}

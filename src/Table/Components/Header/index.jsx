@@ -20,9 +20,9 @@ const Header = (props) => {
 	<div   
 	role="Header"
 	aria-rowindex={1} 
-	className='header-container'
+	className='table-header-container'
 	>
-		<div className='ag-header-row'>
+		<div className='table-header-row'>
 			{cells}
 		</div>
 	</div>

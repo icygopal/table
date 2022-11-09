@@ -12,11 +12,12 @@ const Cell = (props) => {
 	return (
 		<div 
 		key={key} 
+    ref={ref}
 		tabIndex={tabIndex}
-		className={`ag-header-cell table-cell ${isCellSelected ? "selected-cell" : ""}`} 
+		className={`table-column-cell table-cell ${isCellSelected ? "table-selected-cell" : ""}`} 
 		onClick={handleClick}
 		style={style}
-		><div className="btns">{row[column.key]}</div></div>
+		><div className="table-column-info">{row[column.key]}</div></div>
 	)
 }
 
