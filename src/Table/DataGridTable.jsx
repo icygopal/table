@@ -240,9 +240,9 @@ const DataGridTable = ({
 				<Header
 					columns={viewportColumns}
 				/>
-				{show && <div style={{ height: 40 }} className="addContainer" >gopal</div>}
+				{show && <div style={{ height: 40 }} className="table-add-newrow" >gopal</div>}
 
-				<div className="itemContainer" style={containerStyle}>
+				<div className="table-main-content" style={containerStyle}>
 
 					{result}
 				</div>
