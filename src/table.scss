@@ -43,8 +43,11 @@ div[role=row] {
 	position: absolute;
 	border-right: 1px solid #f1f4f8;
     line-height: 22px;
-    height: 30px;
-    padding: 5px;
+    height: 30px; 
+	  
+	.table-header-info {
+		padding: 5px;
+	}
 }
 }
 
@@ -96,8 +99,7 @@ div[role=row] {
     overflow: hidden;
   }
   .table-add-newrow {
-	position: sticky;
-	top: 47;
+	position: sticky;	
 	width: 100%;
 	background-color: black;
 	z-index: 50;

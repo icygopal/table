@@ -231,7 +231,7 @@ const DataGridTable = ({
 			<div
 				ref={tableRef}
 				className="viewPort"
-				style={{ height: "calc(100vh - 275px)" }}
+				style={{ height: "calc(100vh - 100px)" }}
 				onScroll={handleScroll}
 				onKeyDown={handleKeyDown}
 				aria-colcount={columns.length}
