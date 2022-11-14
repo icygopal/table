@@ -41,7 +41,7 @@ const useViewportColumns = ({
 	  }
   
 	  return { viewportColumns, flexWidthViewportColumns };
-	}, [startIdx, colOverscanEndIdx, columns]);
+	}, [startIdx, colOverscanEndIdx, columns,columnWidths]);
 
 	return {
 	  viewportColumns,

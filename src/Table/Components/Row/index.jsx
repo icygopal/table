@@ -1,4 +1,5 @@
 import React, { forwardRef, memo } from 'react'
+import InputCell from '../Editors/InputCell';
 import Cell from './Cell';
 
 const Row = (props) => {
@@ -24,17 +25,34 @@ const Row = (props) => {
 	  const column = viewportColumns[index];
 	  const { idx } = column;
 	  const style = { width: column.width, left: column.left }
+	
+	//   if(isCellSelected){
+	// 	cells.push(
+	// 		<InputCell
+	// 		key={column.key}
+	// 		column={column}
+	// 		row={row}
+	// 		rowIdx={rowIdx} 
+	// 		style={style}
+	// 		isCellSelected={isCellSelected}
+	// 		selectCell={selectCell}
+	// 		/>
+	// 	)
+	//   }else{
 		cells.push(
-		  <Cell
-			key={column.key}
-			column={column}
-			row={row}
-			rowIdx={rowIdx} 
-			style={style}
-			isCellSelected={isCellSelected}
-			selectCell={selectCell}
-		  />
-		);
+			<Cell
+			  key={column.key}
+			  column={column}
+			  row={row}
+			  rowIdx={rowIdx} 
+			  style={style}
+			  isCellSelected={isCellSelected}
+			  selectCell={selectCell}
+			/>
+		  );
+	//   }
+	 
+	 
 	}
 	const isGroupRowFocused = selectedPosition.idx === -1 && selectedPosition.rowIdx !== -2;
 

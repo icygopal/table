@@ -21,13 +21,14 @@ const useCalculatedColumns = ({
   
 	  const columns = rawColumns.map((rawColumn,index) => {
 		const frozen = rawColumn.frozen || false;
-  
+		let width = columnWidths.get(rawColumn.key) ?? rawColumn.width;
+		
 		const column = {
 		  ...rawColumn,
 		  idx: index,
 		  frozen,
 		  isLastFrozenColumn: false,
-		  width: rawColumn.width ?? defaultWidth,
+		  width: width ?? defaultWidth,
 		  minWidth: rawColumn.minWidth ?? defaultMinWidth,
 		  maxWidth: rawColumn.maxWidth ?? defaultMaxWidth,
 		  sortable: rawColumn.sortable ?? defaultSortable,
@@ -72,6 +73,7 @@ const useCalculatedColumns = ({
 	  defaultMaxWidth,
 	  defaultResizable,
 	  defaultSortable,
+	  columnWidths
 	]);
   
 	const { templateColumns, totalFrozenColumnWidth, columnMetrics } = useMemo(()=> {

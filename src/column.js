@@ -8,7 +8,8 @@ export const column = [
 		cellClass:"",
 		editable:"true",
 		cellType:"Input",
-		headerRender:HeaderCell
+		headerRender:HeaderCell,
+		resizable:true
 	},
 	{
 		key:"area",
@@ -17,7 +18,9 @@ export const column = [
 		cellClass:"",
 		editable:"true",
 		cellType:"Input",
-		headerRender:HeaderCell
+		headerRender:HeaderCell,
+		resizable:true
+		
 	},
 	{
 		key:"id",
@@ -26,7 +29,8 @@ export const column = [
 		cellClass:"",
 		editable:"true",
 		cellType:"Input",
-		headerRender:HeaderCell
+		headerRender:HeaderCell,
+		resizable:true
 	},
 	{
 		key:"available",
@@ -35,7 +39,8 @@ export const column = [
 		cellClass:"",
 		editable:"true",
 		cellType:"Input",
-		headerRender:HeaderCell
+		headerRender:HeaderCell,
+		resizable:true
 	},
 	{
 		key:"version",
@@ -44,6 +49,7 @@ export const column = [
 		cellClass:"",
 		editable:"true",
 		cellType:"Input",
-		headerRender:HeaderCell
+		headerRender:HeaderCell,
+		resizable:true
 	}
 ]

@@ -22,7 +22,6 @@ div[role=row] {
 
 .table .table-header-container{
 	white-space: nowrap;
-	height: 30px;
 	width: 100%;
 	position: relative;
 	border: 1px solid black;
@@ -44,22 +43,33 @@ div[role=row] {
 	border-right: 1px solid #f1f4f8;
     line-height: 22px;
     height: 30px; 
-	  
 	.table-header-info {
 		padding: 5px;
 	}
 }
 }
 
-.table-column-cell{
+
+.table-header-cell:after {
+    content: "";
+    cursor: col-resize;
+    inline-size: 10px;
+    inset-block-end: 0;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    position: absolute;
+}
+
+.table-cell{
 	position: absolute;
 	border-right: 1px solid #f1f4f8;
 	font-size: 14px;
 	line-height: 20px;
 	height: 30px;
+	box-sizing: border-box;
 }
 
-.table-column-cell:focus-visible {
+.table-cell:focus-visible {
 	outline:none;
 }
 

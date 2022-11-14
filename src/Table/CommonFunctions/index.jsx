@@ -25,7 +25,7 @@ export function stopPropagation(event) {
   }
   
   export function scrollIntoView(element) {
-	element?.scrollIntoView({ inline: 'nearest', block: 'nearest' });
+	element?.scrollIntoView({inline: 'nearest', block: 'nearest' });
   }
   
 

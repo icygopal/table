@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import { useEffect } from 'react';
 import { isCtrlKeyHeldDown, isSamePosition, scrollIntoView } from './CommonFunctions';
 import Header from './Components/Header';
 import { defaultRowRenderer } from './Components/Row';
@@ -11,6 +12,7 @@ import useViewportColumns from './Hooks/useViewportColumns';
 const initialPosition = {
 	idx: -1,
 	rowIdx: -2,
+	mode: 'SELECT'
 };
 
 const DataGridTable = ({
@@ -38,8 +40,8 @@ const DataGridTable = ({
 	const selectedCellIsWithinSelectionBounds = isCellWithinSelectionBounds(selectedCell);
 	const selectedCellIsWithinViewportBounds = isCellWithinViewportBounds(selectedCell);
 	const selectViewportCellLatest = useLatestFunc(
-		(rowId, colId) => {
-			setSelectedCell({ rowIdx: rowId, idx: colId });
+		(rowId, colId,mode) => {
+			setSelectedCell({ rowIdx: rowId, idx: colId ,mode});
 		}
 	);
 
@@ -77,6 +79,18 @@ const DataGridTable = ({
 
 
 
+
+	const handleColumnResizeLatest = useLatestFunc(handleColumnResize);
+
+	function handleColumnResize (column,width){
+		if (columnWidths.get(column.key) === width) return;
+
+    const newColumnWidths = new Map(columnWidths);
+    newColumnWidths.set(column.key, width);
+	console.log(newColumnWidths)
+    setColumnWidths(newColumnWidths);
+
+	}
 	function isColIdxWithinSelectionBounds(idx) {
 		return idx >= minColIdx && idx <= maxColIdx;
 	}
@@ -152,7 +166,6 @@ const DataGridTable = ({
 
 
 		setSelectedCell(nextPosition);
-
 		scrollIntoView(tableRef.current?.querySelector('[tabindex="0"]'));
 	}
 
@@ -168,10 +181,9 @@ const DataGridTable = ({
 			case "ArrowLeft":
 				return { idx: idx == 0 ? 0 : idx - 1, rowIdx };
 			case "ArrowRight":
-				console.log(columns.length !== idx ? idx + 1 : idx)
 				return { idx: columns.length - 1 !== idx ? idx + 1 : idx, rowIdx };
 			case 'Tab':
-				return { idx: columns.length - 1 !== idx ?idx + (shiftKey ? -1 : 1):idx, rowIdx };
+				return { idx: columns.length - 1 !== idx ? idx + (shiftKey ? -1 : 1) : idx, rowIdx };
 			case 'Home':
 				// If row is selected then move focus to the first row
 				if (isRowSelected) return { idx, rowIdx: 0 };
@@ -200,7 +212,7 @@ const DataGridTable = ({
 		let currentIndx = Math.trunc(scrollTop / itemheight)
 		currentIndx = (currentIndx - numVisibleItems) >= rawRows.length ? currentIndx - numVisibleItems : currentIndx;
 		if (currentIndx !== startRowIdx) {
-			setStart(currentIndx)
+			setStart(currentIndx - 10)
 			const endIndex = ((currentIndx + numVisibleItems) >= rawRows.length ? rawRows.length - 1 : currentIndx) + numVisibleItems
 			setEnd(endIndex)
 		}
@@ -239,8 +251,9 @@ const DataGridTable = ({
 			>
 				<Header
 					columns={viewportColumns}
-				/>
-				{show && <div style={{ height: 40 }} className="table-add-newrow" >gopal</div>}
+					width="30"
+					onColumnResize={handleColumnResizeLatest}
+				/>				{show && <div style={{ height: 40 }} className="table-add-newrow" >gopal</div>}
 
 				<div className="table-main-content" style={containerStyle}>
 
