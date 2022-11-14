@@ -1,55 +1,66 @@
-import HeaderCell from "./Cells/HeaderCell";
-
 export const column = [
 	{
 		key:"title",
-		name:"title",
+		name:"Title",
 		width:180,
 		cellClass:"",
-		editable:"true",
-		cellType:"Input",
-		headerRender:HeaderCell,
+		editable:true,
+		cellType:"INPUT",
 		resizable:true
 	},
 	{
 		key:"area",
-		name:"area",
+		name:"Area",
 		width:180,
 		cellClass:"",
-		editable:"true",
-		cellType:"Input",
-		headerRender:HeaderCell,
+		editable:true,
+		cellType:"INPUT",
 		resizable:true
 		
 	},
 	{
 		key:"id",
-		name:"id",
+		name:"Id",
 		width:180,
 		cellClass:"",
-		editable:"true",
-		cellType:"Input",
-		headerRender:HeaderCell,
+		editable:true,
+		cellType:"Date",
 		resizable:true
 	},
 	{
 		key:"available",
-		name:"available",
+		name:"Available",
 		width:180,
 		cellClass:"",
-		editable:"true",
-		cellType:"Input",
-		headerRender:HeaderCell,
+		editable:true,
+		cellType:"SELECT",
 		resizable:true
 	},
 	{
 		key:"version",
-		name:"version",
+		name:"Version",
 		width:180,
 		cellClass:"",
-		editable:"true",
-		cellType:"Input",
-		headerRender:HeaderCell,
+		editable:true,
+		cellType:"INPUT",
+		resizable:true
+	},
+	{
+		key:"AQS",
+		name:"Version",
+		width:180,
+		cellClass:"",
+		editable:true,
+		cellType:"INPUT",
+		resizable:true
+	},
+	{
+		key:"AQ234",
+		name:"Version",
+		width:180,
+		cellClass:"",
+		editable:true,
+		cellType:"INPUT",
 		resizable:true
 	}
 ]

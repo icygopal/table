@@ -1,6 +1,7 @@
 import React, { forwardRef, memo } from 'react'
 import InputCell from '../Editors/InputCell';
-import Cell from './Cell';
+import SelectCell from '../Editors/SelectCell';
+import Cell from './CellTypes/Cell';
 
 const Row = (props) => {
 	const {
@@ -21,24 +22,34 @@ const Row = (props) => {
 
 	
 	for (let index = 0; index < viewportColumns.length; index++) {
-		const isCellSelected = selectedCellIdx === index;
-	  const column = viewportColumns[index];
-	  const { idx } = column;
-	  const style = { width: column.width, left: column.left }
-	
-	//   if(isCellSelected){
-	// 	cells.push(
-	// 		<InputCell
-	// 		key={column.key}
-	// 		column={column}
-	// 		row={row}
-	// 		rowIdx={rowIdx} 
-	// 		style={style}
-	// 		isCellSelected={isCellSelected}
-	// 		selectCell={selectCell}
-	// 		/>
-	// 	)
-	//   }else{
+		const {rowIdx:rowId,idx:cellId, mode}=selectedPosition
+		const column = viewportColumns[index];
+		const { idx } = column;
+		const style = { width: column.width, left: column.left }
+		const isCellSelected = (rowIdx ===rowId &&  cellId === idx);
+	  if(isCellSelected && mode==="SELECT"){
+		cells.push(
+			<SelectCell
+			key={column.key}
+			column={column}
+			row={row}
+			rowIdx={rowIdx} 
+			style={style}
+			isCellSelected={isCellSelected}
+			selectCell={selectCell}
+			/>
+		)
+	}else if(isCellSelected && mode==="INPUT"){
+		cells.push(<InputCell
+			key={column.key}
+			column={column}
+			row={row}
+			rowIdx={rowIdx} 
+			style={style}
+			isCellSelected={isCellSelected}
+			selectCell={selectCell}
+			/>)
+	}else{
 		cells.push(
 			<Cell
 			  key={column.key}
@@ -50,11 +61,10 @@ const Row = (props) => {
 			  selectCell={selectCell}
 			/>
 		  );
-	//   }
+	  }
 	 
 	 
 	}
-	const isGroupRowFocused = selectedPosition.idx === -1 && selectedPosition.rowIdx !== -2;
 
 	return (
 		<>

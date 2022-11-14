@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useMemo, useRef, useState } from 'react'
 import { useEffect } from 'react';
 import { isCtrlKeyHeldDown, isSamePosition, scrollIntoView } from './CommonFunctions';
 import Header from './Components/Header';
@@ -20,18 +20,17 @@ const DataGridTable = ({
 	columns: rawColumns,
 	rows: rawRows,
 }) => {
-	const TotalColumnWidth = rawColumns.reduce((a, b) => a + b.width, 0)
 	const [tableRef, tableWidth, tableHeight, isWidthInitialized] = useTableDimensions();
 	const [scrollLeft, setScrollLeft] = useState(0);
 	const [columnWidths, setColumnWidths] = useState(() => new Map());
 	const [selectedCell, setSelectedCell] = useState(
 		initialPosition
 	);
-	const numVisibleItems = 30;
+	
+	const [totalVisibleRow,setTotalVisibleRow] =useState(30);
 	const [startRowIdx, setStart] = useState(0)
-	const [endRowIdx, setEnd] = useState(numVisibleItems)
+	const [endRowIdx, setEnd] = useState(totalVisibleRow)
 	const [show, setShow] = useState(false)
-	const containerStyle = { height: rawRows.length * itemheight, width: TotalColumnWidth }
 	const minColIdx = 0;
 	const maxColIdx = rawColumns.length - 1;
 	const minRowIdx = -1;
@@ -40,8 +39,8 @@ const DataGridTable = ({
 	const selectedCellIsWithinSelectionBounds = isCellWithinSelectionBounds(selectedCell);
 	const selectedCellIsWithinViewportBounds = isCellWithinViewportBounds(selectedCell);
 	const selectViewportCellLatest = useLatestFunc(
-		(rowId, colId,mode) => {
-			setSelectedCell({ rowIdx: rowId, idx: colId ,mode});
+		(rowId, colId, mode) => {
+			setSelectedCell({ rowIdx: rowId, idx: colId, mode });
 		}
 	);
 
@@ -49,6 +48,10 @@ const DataGridTable = ({
 	const findRowIdx = (offset) => Math.floor(offset / itemheight)
 
 
+
+	useEffect(()=>{
+		setTotalVisibleRow(tableHeight/30)
+	},[tableHeight])
 
 	const {
 		columns,
@@ -64,6 +67,8 @@ const DataGridTable = ({
 		viewportWidth: tableWidth,
 		scrollLeft,
 	});
+	const TotalColumnWidth = columns.reduce((a, b) => a + b.width, 0)
+	const containerStyle = { height: rawRows.length * itemheight, width: TotalColumnWidth }
 
 
 	const { viewportColumns } = useViewportColumns({
@@ -76,19 +81,19 @@ const DataGridTable = ({
 		endRowIdx,
 		columnWidths,
 	});
-
+console.log({viewportColumns})
 
 
 
 	const handleColumnResizeLatest = useLatestFunc(handleColumnResize);
 
-	function handleColumnResize (column,width){
+	function handleColumnResize(column, width) {
 		if (columnWidths.get(column.key) === width) return;
 
-    const newColumnWidths = new Map(columnWidths);
-    newColumnWidths.set(column.key, width);
-	console.log(newColumnWidths)
-    setColumnWidths(newColumnWidths);
+		const newColumnWidths = new Map(columnWidths);
+		newColumnWidths.set(column.key, width);
+		console.log(newColumnWidths)
+		setColumnWidths(newColumnWidths);
 
 	}
 	function isColIdxWithinSelectionBounds(idx) {
@@ -166,7 +171,7 @@ const DataGridTable = ({
 
 
 		setSelectedCell(nextPosition);
-		scrollIntoView(tableRef.current?.querySelector('[tabindex="0"]'));
+		// scrollIntoView(tableRef.current?.querySelector('[tabindex="0"]'));
 	}
 
 	function getNextPosition(key, ctrlKey, shiftKey) {
@@ -210,12 +215,13 @@ const DataGridTable = ({
 		const { scrollTop, scrollLeft } = tableRef.current
 		setScrollLeft(scrollLeft)
 		let currentIndx = Math.trunc(scrollTop / itemheight)
-		currentIndx = (currentIndx - numVisibleItems) >= rawRows.length ? currentIndx - numVisibleItems : currentIndx;
+		currentIndx = (currentIndx - totalVisibleRow) >= rawRows.length ? currentIndx - totalVisibleRow : currentIndx;
 		if (currentIndx !== startRowIdx) {
 			setStart(currentIndx - 10)
-			const endIndex = ((currentIndx + numVisibleItems) >= rawRows.length ? rawRows.length - 1 : currentIndx) + numVisibleItems
+			const endIndex = ((currentIndx + totalVisibleRow) >= rawRows.length ? rawRows.length - 1 : currentIndx) + totalVisibleRow
 			setEnd(endIndex)
 		}
+		console.log(selectedCell)
 	}
 
 	const { idx: selectedIdx, rowIdx: selectedRowIdx } = selectedCell;
@@ -251,6 +257,7 @@ const DataGridTable = ({
 			>
 				<Header
 					columns={viewportColumns}
+					TotalColumnWidth={TotalColumnWidth}
 					width="30"
 					onColumnResize={handleColumnResizeLatest}
 				/>				{show && <div style={{ height: 40 }} className="table-add-newrow" >gopal</div>}

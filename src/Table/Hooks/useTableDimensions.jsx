@@ -1,5 +1,4 @@
-import React, { useRef, useState } from 'react'
-import { useLayoutEffect } from './useLayoutEffect';
+import React, { useEffect, useRef, useState } from 'react'
 
 const useTableDimensions = () => {
 
@@ -8,7 +7,7 @@ const useTableDimensions = () => {
 	const [blockSize, setBlockSize] = useState(1);
 	const [isWidthInitialized, setWidthInitialized] = useState(false);
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		const { ResizeObserver } = window;
 
 		if (ResizeObserver == null) return;

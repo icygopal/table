@@ -104,9 +104,7 @@ div[role=row] {
   
   .table-main-content {
 	position: absolute;
-	width: 100% !important;
 	background-color: #fff;
-    overflow: hidden;
   }
   .table-add-newrow {
 	position: sticky;	
@@ -119,7 +117,7 @@ div[role=row] {
   .table-row-cell {
 	position: absolute;
 	// background-color: #fff;
-	border: solid 1px #f1f4f8;
+	border-bottom: solid 1px #f1f4f8;
 	width: 100%;
 	// text-align:center;
 	// border-bottom: 1px solid #f1f4f8;
@@ -132,9 +130,48 @@ div[role=row] {
 
   .table-selected-cell{
 	box-shadow: rgb(35 131 226 / 57%) 0px 0px 0px 1px inset, rgb(35 131 226 / 35%) 0px 0px 0px 2px;
+
+	z-index: 1;
+	border: 0;
+	border-radius: 3px;
+	outline: none;
+  }
+
+
+  .input-cell-enable {
+	box-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.25);
 	z-index: 1;
 	border: 0;
 	border-radius: 3px;
 	outline: none;
   }
   
+
+  .bg-transparent {
+	background-color: transparent !important;
+  }
+
+  .form-control {
+    display: block;
+    width: 100%;
+    padding: 7.5px 10px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 15px;
+    color: #172a41;
+    background: #F1F4F8;
+    background-clip: padding-box;
+    border: 0px solid #bfccda;
+    border-radius: 3px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    text-overflow: ellipsis;
+	box-sizing: border-box;
+}
+
+input.bg-transparent.form-control:focus-visible {
+  outline: inherit;
+}
+
+.table-cell.editable:hover {
+	background-color: #DBE2EB;
+}
