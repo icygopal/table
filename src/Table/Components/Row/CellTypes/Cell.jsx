@@ -20,10 +20,10 @@ const IconAngleArrowDown = ({ className }) => (
 	</svg>
   );
 
-const Cell = (props) => {
+const RenderCell = (props) => {
 	const { column, row, key, style, isCellSelected, selectCell, rowIdx } = props
 	const selectCellWrapper =(openEditor)=> {
-		selectCell(rowIdx, column.idx, column.cellType);
+		selectCell(rowIdx, column.idx, column.cellType,openEditor);
 	  }
 	
 	
@@ -47,6 +47,7 @@ const Cell = (props) => {
 			isCellSelected={isCellSelected}
 			selectCell={selectCell}/>)
 	}
+	
 	return (
 		<div
 			key={key}
@@ -65,4 +66,4 @@ const Cell = (props) => {
 	)
 }
 
-export default memo(Cell)
+export default memo(RenderCell)

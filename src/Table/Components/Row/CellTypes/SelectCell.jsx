@@ -42,6 +42,7 @@ const SelectCell = (props) => {
 		// onRowDoubleClick?.(row, column);
 	  }
 	const { ref, tabIndex, onFocus } = useRovingCellRef(isCellSelected);
+	console.log(row[column.key])
 	return (
 		<div
 			key={key}
@@ -55,7 +56,7 @@ const SelectCell = (props) => {
 		// onFocus={onFocus}
 		>
 			<div className="table-column-info d-flex px-2 justify-content-between">
-				Select... <span> <IconAngleArrowDown className="w-20px" />
+				{row[column.key] ?row[column.key]: "Select..."} <span> <IconAngleArrowDown className="w-20px" />
 					</span></div></div>
 	)
 }

@@ -1,5 +1,8 @@
 import React from 'react'
 import Select, { components } from "react-select";
+import AsyncCreatableSelect  from "react-select/async-creatable";
+
+import { IconAngleArrowDown, IconAngleArrowTop } from '../../Icons';
 const newSmallSelectStyle = {
     control: (base, state) => ({
         ...base,
@@ -66,13 +69,23 @@ const newSmallSelectStyle = {
         width:"0"
     }),
 };
+
+
+
+const DropdownIndicator = (props) => {
+    return (
+        <components.DropdownIndicator {...props} >
+            {props.selectProps.menuIsOpen ? <IconAngleArrowTop  /> : <IconAngleArrowDown  />}
+        </components.DropdownIndicator>
+    );
+};
 const SelectCell = (props) => {
     const { column, row, key, style, isCellSelected, selectCell, rowIdx } = props
     return (
         <div
             className={`table-cell  ${isCellSelected ? "table-selected-cell" : ""}`}
             style={style}
-        ><Select autoFocus options={[{ value: 1, label: 'Yes' }, { value: 1, label: 'Yes' }]} styles={newSmallSelectStyle} />
+        ><AsyncCreatableSelect autoFocus loadOptions={column.loadOptions}  components={{ DropdownIndicator }} options={column.selectOptions} styles={newSmallSelectStyle} onChange={({value})=>onRowChange({...row,[column.key]:value})}/>
         </div>
     )
 }

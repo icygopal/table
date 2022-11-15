@@ -12,13 +12,15 @@ import useViewportColumns from './Hooks/useViewportColumns';
 const initialPosition = {
 	idx: -1,
 	rowIdx: -2,
-	mode: 'SELECT'
+	mode: 'SELECT',
+	isEditEnable:false
 };
 
 const DataGridTable = ({
 	itemheight,
 	columns: rawColumns,
 	rows: rawRows,
+	onRowsChange
 }) => {
 	const [tableRef, tableWidth, tableHeight, isWidthInitialized] = useTableDimensions();
 	const [scrollLeft, setScrollLeft] = useState(0);
@@ -39,8 +41,8 @@ const DataGridTable = ({
 	const selectedCellIsWithinSelectionBounds = isCellWithinSelectionBounds(selectedCell);
 	const selectedCellIsWithinViewportBounds = isCellWithinViewportBounds(selectedCell);
 	const selectViewportCellLatest = useLatestFunc(
-		(rowId, colId, mode) => {
-			setSelectedCell({ rowIdx: rowId, idx: colId, mode });
+		(rowId, colId, mode,isEditEnable) => {
+			setSelectedCell({ rowIdx: rowId, idx: colId, mode,isEditEnable:isEditEnable });
 		}
 	);
 
@@ -81,7 +83,6 @@ const DataGridTable = ({
 		endRowIdx,
 		columnWidths,
 	});
-console.log({viewportColumns})
 
 
 
@@ -125,8 +126,7 @@ console.log({viewportColumns})
 		if (!isCellEvent) return;
 
 		const { key, keyCode } = event;
-		const { rowIdx } = selectedCell;
-
+		const { rowIdx,isEditEnable } = selectedCell;
 
 		if (isRowIdxWithinViewportBounds(rowIdx)) {
 			if (
@@ -136,7 +136,7 @@ console.log({viewportColumns})
 				return;
 			}
 		}
-		console.log("Asdfads")
+		
 		switch (key) {
 			case 'Escape':
 				setCopiedCell(null);
@@ -171,7 +171,7 @@ console.log({viewportColumns})
 
 
 		setSelectedCell(nextPosition);
-		// scrollIntoView(tableRef.current?.querySelector('[tabindex="0"]'));
+		scrollIntoView(tableRef.current?.querySelector('[tabindex="0"]'));
 	}
 
 	function getNextPosition(key, ctrlKey, shiftKey) {
@@ -219,11 +219,20 @@ console.log({viewportColumns})
 		if (currentIndx !== startRowIdx) {
 			setStart(currentIndx - 10)
 			const endIndex = ((currentIndx + totalVisibleRow) >= rawRows.length ? rawRows.length - 1 : currentIndx) + totalVisibleRow
-			setEnd(endIndex)
+			setEnd(endIndex+10)
 		}
 		console.log(selectedCell)
 	}
 
+
+	const updateRow = (rowIdx, row)=> {
+		if (typeof onRowsChange !== 'function') return;
+		if (row === rawRows[rowIdx]) return;
+		console.log("Adsfadsf")
+		const updatedRows = [...rawRows];
+		updatedRows[rowIdx] = row;
+		onRowsChange(updatedRows);
+	  }
 	const { idx: selectedIdx, rowIdx: selectedRowIdx } = selectedCell;
 
 	let result = [];
@@ -239,11 +248,15 @@ console.log({viewportColumns})
 				height: itemheight,
 				selectedCellIdx: selectedRowIdx === rowIdx ? selectedIdx : undefined,
 				selectedPosition: selectedCell,
-				selectCell: selectViewportCellLatest
+				selectCell: selectViewportCellLatest,
+				onRowChange:updateRow
 			})
 			);
 		}
 	}
+
+	
+
 	return (
 		<>
 			<div

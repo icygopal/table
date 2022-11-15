@@ -5,9 +5,10 @@ const DateTimeCell = (props) => {
     return (
         <div
             className={`table-cell  ${isCellSelected ? "table-selected-cell" : ""}`}
+            
             style={style}
         >
-            <Select autoFocus options={[{ value: 1, label: 'Yes' }, { value: 1, label: 'Yes' }]} styles={newSmallSelectStyle} />
+            <div className='dis'>-</div>
         </div>
     )
 }

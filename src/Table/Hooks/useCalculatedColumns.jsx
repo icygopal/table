@@ -116,6 +116,7 @@ const useCalculatedColumns = ({
   
 	  // get the first visible non-frozen column index
 	  let colVisibleStartIdx = firstUnfrozenColumnIdx;
+	  console.log({colVisibleStartIdx})
 	  while (colVisibleStartIdx < lastColIdx) {
 		const { left, width } = columnMetrics.get(columns[colVisibleStartIdx]);
 		if (left + width > viewportLeft) {

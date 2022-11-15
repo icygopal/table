@@ -25,7 +25,6 @@ const Header = (props) => {
 	style={{height:height, width:TotalColumnWidth}}
 	>
 		{cells}
-		
 	</div>
   )
 }

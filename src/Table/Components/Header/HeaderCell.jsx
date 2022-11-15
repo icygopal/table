@@ -1,10 +1,11 @@
 import React, { memo } from 'react'
+import { IconAngleArrowDown } from '../../Icons';
 
 const HeaderCell = (props) => {
-	const { style, column, key ,onColumnResize } = props
+	const { style, column, key, onColumnResize } = props
 
 
-	function onPointerDown(event) {
+	const onPointerDown = (event) => {
 		if (event.pointerType === 'mouse' && event.buttons !== 1) {
 			return;
 		}
@@ -24,10 +25,9 @@ const HeaderCell = (props) => {
 			const { right, left } = currentTarget.getBoundingClientRect();
 			const width = event.clientX + offset - left;
 
-			console.log(width)
-			  if (width > 0) {
+			if (width > 0) {
 				onColumnResize(column, width);
-			  }
+			}
 		}
 
 		function onLostPointerCapture() {
@@ -39,13 +39,22 @@ const HeaderCell = (props) => {
 		currentTarget.addEventListener('pointermove', onPointerMove);
 		currentTarget.addEventListener('lostpointercapture', onLostPointerCapture);
 	}
+	const handleClick = (e)=>{
+		console.log("erer")
+	}
 	return (
 		<div
 			key={key}
 			className="table-header-cell"
 			style={style}
 			onPointerDown={column.resizable ? onPointerDown : undefined}
-		><div className="table-header-info">{column.name}</div></div>
+			onClick={handleClick}
+		>
+			<div className='d-flex align-content-center '>
+				<span className="table-header-info">{column.name}</span>
+				{/* <span className='d-flex align-content-center'><IconAngleArrowDown  /></span> */}
+			</div>
+		</div>
 	)
 }
 

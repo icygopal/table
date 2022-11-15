@@ -1,3 +1,5 @@
+import { getFromToPlace } from "./Table/Icons";
+
 export const column = [
 	{
 		key:"title",
@@ -6,7 +8,7 @@ export const column = [
 		cellClass:"",
 		editable:true,
 		cellType:"INPUT",
-		resizable:true
+		resizable:false
 	},
 	{
 		key:"area",
@@ -34,7 +36,9 @@ export const column = [
 		cellClass:"",
 		editable:true,
 		cellType:"SELECT",
-		resizable:true
+		resizable:true,
+		selectOptions:[{ value: 1, label: 'Yes' }, { value: 1, label: 'Yes' }],
+		loadOptions:getFromToPlace
 	},
 	{
 		key:"version",

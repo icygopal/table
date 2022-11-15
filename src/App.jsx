@@ -7,7 +7,7 @@ function App() {
 
 	const [Rowdata, setData] = useState(data)
 	return (
-		<DataGridTable itemheight={30} columns={column} rows={Rowdata} setData={setData} />
+		<DataGridTable itemheight={30} columns={column} rows={Rowdata} onRowsChange={setData} />
 	)
 }
 
