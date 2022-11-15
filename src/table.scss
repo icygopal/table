@@ -67,6 +67,7 @@ div[role=row] {
 	line-height: 20px;
 	height: 30px;
 	box-sizing: border-box;
+	transition: left .2s
 }
 
 .table-cell:focus-visible {
@@ -119,6 +120,7 @@ div[role=row] {
 	// background-color: #fff;
 	border-bottom: solid 1px #f1f4f8;
 	width: 100%;
+	
 	// text-align:center;
 	// border-bottom: 1px solid #f1f4f8;
   }

@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import HeaderCell from './HeaderCell';
 
 const Header = (props) => {
-	const { columns,height,onColumnResize,TotalColumnWidth} = props
+	const { columns,height,onColumnResize,TotalColumnWidth,handleColumnsReorder} = props
 	const cells = [];
 	for (let index = 0; index < columns.length; index++) {
 		const column = columns[index];
@@ -13,9 +13,11 @@ const Header = (props) => {
 		  column={column}
 		  style={style}
 		  onColumnResize={onColumnResize}
+		  handleColumnsReorder={handleColumnsReorder}
 		/>
 	  );
 	}
+
 
   return (
 	<div   

@@ -7,7 +7,8 @@ import useCalculatedColumns from './Hooks/useCalculatedColumns';
 import { useLatestFunc } from './Hooks/useLatestFunc';
 import useTableDimensions from './Hooks/useTableDimensions';
 import useViewportColumns from './Hooks/useViewportColumns';
-
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 const initialPosition = {
 	idx: -1,
@@ -20,7 +21,8 @@ const DataGridTable = ({
 	itemheight,
 	columns: rawColumns,
 	rows: rawRows,
-	onRowsChange
+	onRowsChange,
+	handleColumnsReorder
 }) => {
 	const [tableRef, tableWidth, tableHeight, isWidthInitialized] = useTableDimensions();
 	const [scrollLeft, setScrollLeft] = useState(0);
@@ -256,9 +258,10 @@ const DataGridTable = ({
 	}
 
 	
-
+	
 	return (
 		<>
+		 <DndProvider backend={HTML5Backend}>
 			<div
 				ref={tableRef}
 				className="viewPort"
@@ -273,14 +276,14 @@ const DataGridTable = ({
 					TotalColumnWidth={TotalColumnWidth}
 					width="30"
 					onColumnResize={handleColumnResizeLatest}
-				/>				{show && <div style={{ height: 40 }} className="table-add-newrow" >gopal</div>}
-
+					handleColumnsReorder={handleColumnsReorder}
+				/>				
+				{show && <div style={{ height: 40 }} className="table-add-newrow" >gopal</div>}
 				<div className="table-main-content" style={containerStyle}>
-
 					{result}
 				</div>
-
 			</div>
+			</DndProvider>
 			<button onClick={() => setShow(!show)}>add</button>
 		</>
 	)
