@@ -177,3 +177,15 @@ input.bg-transparent.form-control:focus-visible {
 .table-cell.editable:hover {
 	background-color: #DBE2EB;
 }
+
+#drag-item {
+	position:absolute;
+	width:82px;
+	height:30px;
+	top :-1000px;
+	cursor: grabbing;
+	background-color: white;
+	opacity: 1;
+	z-index: 100;
+	box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}

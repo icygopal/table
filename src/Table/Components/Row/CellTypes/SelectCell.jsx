@@ -42,7 +42,6 @@ const SelectCell = (props) => {
 		// onRowDoubleClick?.(row, column);
 	  }
 	const { ref, tabIndex, onFocus } = useRovingCellRef(isCellSelected);
-	console.log(row[column.key])
 	return (
 		<div
 			key={key}

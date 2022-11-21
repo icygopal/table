@@ -261,7 +261,6 @@ const DataGridTable = ({
 	
 	return (
 		<>
-		 <DndProvider backend={HTML5Backend}>
 			<div
 				ref={tableRef}
 				className="viewPort"
@@ -283,7 +282,6 @@ const DataGridTable = ({
 					{result}
 				</div>
 			</div>
-			</DndProvider>
 			<button onClick={() => setShow(!show)}>add</button>
 		</>
 	)

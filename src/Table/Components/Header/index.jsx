@@ -1,8 +1,11 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import HeaderCell from './HeaderCell';
 
 const Header = (props) => {
 	const { columns,height,onColumnResize,TotalColumnWidth,handleColumnsReorder} = props
+	const [isOver,setIsOver] = useState()
+	const [isDragging,setIsDragging] = useState()
+	const [prevDragOver,setPrevDragOver] = useState()
 	const cells = [];
 	for (let index = 0; index < columns.length; index++) {
 		const column = columns[index];
@@ -14,6 +17,12 @@ const Header = (props) => {
 		  style={style}
 		  onColumnResize={onColumnResize}
 		  handleColumnsReorder={handleColumnsReorder}
+		  isOver={isOver}
+		  setIsOver={setIsOver}
+		  isDragging={isDragging}
+		  setIsDragging={setIsDragging}
+		  prevDragOver={prevDragOver}
+		  setPrevDragOver={setPrevDragOver}
 		/>
 	  );
 	}
