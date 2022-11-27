@@ -47,7 +47,7 @@ const SelectCell = (props) => {
 			key={key}
 			ref={ref}
 			tabIndex={tabIndex}
-			className={`table-cell  ${isCellSelected ? "table-selected-cell" : ""}`}
+			className={`table-cell  ${isCellSelected ? "cell-selected" : ""}`}
 			onClick={handleClick}
 			style={style}
 			onDoubleClick={handleDoubleClick}

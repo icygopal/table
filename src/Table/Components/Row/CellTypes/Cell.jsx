@@ -53,11 +53,13 @@ const RenderCell = (props) => {
 			key={key}
 			ref={ref}
 			tabIndex={tabIndex}
-			className={`table-cell  ${isCellSelected ? "table-selected-cell" : ""} ${column.editable? "editable":""}`}
+			aria-cellindex={column.idx}
+			id={`cell-${rowIdx}-${column.idx}`}
+			className={`table-cell  ${isCellSelected ? "cell-selected" : ""} ${column.editable? "editable":""}`}
 			onClick={handleClick}
 			style={style}
 			onDoubleClick={handleDoubleClick}
-		// onFocus={onFocus}
+		onFocus={onFocus}
 		>
 			<div className="table-column-info d-flex align-items-center justify-content-between">
 				{row[column.key]}

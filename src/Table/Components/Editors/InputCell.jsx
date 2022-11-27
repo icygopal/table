@@ -23,7 +23,7 @@ const InputCell = (props) => {
 	}
 	return (
 		<div
-			className={`table-cell  ${isCellSelected ? "table-selected-cell" : ""} `}
+			className={`table-cell  ${isCellSelected ? "editor-container" : ""} `}
 			style={style}
 			onKeyDown={handleKeyDown}
 		>

@@ -23,7 +23,7 @@ function App() {
 		}
 	  }
 	return (
-		<DataGridTable itemheight={30} columns={col} handleColumnsReorder={handleColumnsReorder} rows={Rowdata} onRowsChange={setData} />
+		<DataGridTable itemheight={40} columns={col} handleColumnsReorder={handleColumnsReorder} rows={Rowdata} onRowsChange={setData} />
 	)
 }
 

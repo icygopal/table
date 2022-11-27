@@ -83,7 +83,7 @@ const SelectCell = (props) => {
     const { column, row, key, style, isCellSelected, selectCell, rowIdx } = props
     return (
         <div
-            className={`table-cell  ${isCellSelected ? "table-selected-cell" : ""}`}
+            className={`table-cell  ${isCellSelected ? "cell-selected" : ""}`}
             style={style}
         ><AsyncCreatableSelect autoFocus loadOptions={column.loadOptions}  components={{ DropdownIndicator }} options={column.selectOptions} styles={newSmallSelectStyle} onChange={({value})=>onRowChange({...row,[column.key]:value})}/>
         </div>

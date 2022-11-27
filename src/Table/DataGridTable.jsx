@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react'
+import React, {useState } from 'react'
 import { useEffect } from 'react';
 import { isCtrlKeyHeldDown, isSamePosition, scrollIntoView } from './CommonFunctions';
 import Header from './Components/Header';
@@ -7,8 +7,6 @@ import useCalculatedColumns from './Hooks/useCalculatedColumns';
 import { useLatestFunc } from './Hooks/useLatestFunc';
 import useTableDimensions from './Hooks/useTableDimensions';
 import useViewportColumns from './Hooks/useViewportColumns';
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
 
 const initialPosition = {
 	idx: -1,
@@ -41,7 +39,6 @@ const DataGridTable = ({
 	const maxRowIdx = rawRows.length - 1;
 
 	const selectedCellIsWithinSelectionBounds = isCellWithinSelectionBounds(selectedCell);
-	const selectedCellIsWithinViewportBounds = isCellWithinViewportBounds(selectedCell);
 	const selectViewportCellLatest = useLatestFunc(
 		(rowId, colId, mode,isEditEnable) => {
 			setSelectedCell({ rowIdx: rowId, idx: colId, mode,isEditEnable:isEditEnable });
@@ -50,8 +47,6 @@ const DataGridTable = ({
 
 	const getRowTop = (rowIdx) => rowIdx * itemheight
 	const findRowIdx = (offset) => Math.floor(offset / itemheight)
-
-
 
 	useEffect(()=>{
 		setTotalVisibleRow(tableHeight/30)
@@ -95,7 +90,6 @@ const DataGridTable = ({
 
 		const newColumnWidths = new Map(columnWidths);
 		newColumnWidths.set(column.key, width);
-		console.log(newColumnWidths)
 		setColumnWidths(newColumnWidths);
 
 	}
@@ -122,7 +116,6 @@ const DataGridTable = ({
 		);
 	}
 	const handleKeyDown = (event) => {
-		console.log("Asdf")
 		if (!(event.target)) return;
 		const isCellEvent = event.target.closest('.table-cell') !== null;
 		if (!isCellEvent) return;
@@ -162,17 +155,16 @@ const DataGridTable = ({
 
 	function navigate(event) {
 		const { key, shiftKey } = event;
-
-		// Do not allow focus to leave
 		event.preventDefault();
-
 		const ctrlKey = isCtrlKeyHeldDown(event);
 		const nextPosition = getNextPosition(key, ctrlKey, shiftKey);
-		console.log(nextPosition)
 		if (isSamePosition(selectedCell, nextPosition)) return;
-
-
 		setSelectedCell(nextPosition);
+		console.log(nextPosition)
+		if(nextPosition.rowIdx==0){
+			tableRef.current.scrollTo(0,scrollLeft)
+		}
+		console.log(tableRef.current?.querySelector('[tabindex="0"]').getBoundingClientRect())
 		scrollIntoView(tableRef.current?.querySelector('[tabindex="0"]'));
 	}
 
@@ -182,7 +174,7 @@ const DataGridTable = ({
 
 		switch (key) {
 			case 'ArrowUp':
-				return { idx, rowIdx: rowIdx == 0 ? 0 : rowIdx - 1 };
+				return { idx, rowIdx: rowIdx == 0 ? 0 : rowIdx-1  };
 			case 'ArrowDown':
 				return { idx, rowIdx: rawRows.length - 1 !== rowIdx ? rowIdx + 1 : idx };
 			case "ArrowLeft":
@@ -192,11 +184,9 @@ const DataGridTable = ({
 			case 'Tab':
 				return { idx: columns.length - 1 !== idx ? idx + (shiftKey ? -1 : 1) : idx, rowIdx };
 			case 'Home':
-				// If row is selected then move focus to the first row
 				if (isRowSelected) return { idx, rowIdx: 0 };
 				return { idx: 0, rowIdx: ctrlKey ? minRowIdx : rowIdx };
 			case 'End':
-				// If row is selected then move focus to the last row.
 				if (isRowSelected) return { idx, rowIdx: rawRows.length - 1 };
 				return { idx: maxColIdx, rowIdx: ctrlKey ? maxRowIdx : rowIdx };
 			case 'PageUp': {
@@ -213,28 +203,27 @@ const DataGridTable = ({
 				return selectedCell;
 		}
 	}
-	const handleScroll = () => {
+	const handleScroll = (e) => {
 		const { scrollTop, scrollLeft } = tableRef.current
 		setScrollLeft(scrollLeft)
 		let currentIndx = Math.trunc(scrollTop / itemheight)
 		currentIndx = (currentIndx - totalVisibleRow) >= rawRows.length ? currentIndx - totalVisibleRow : currentIndx;
 		if (currentIndx !== startRowIdx) {
-			setStart(currentIndx - 10)
+			setStart(currentIndx-10)
 			const endIndex = ((currentIndx + totalVisibleRow) >= rawRows.length ? rawRows.length - 1 : currentIndx) + totalVisibleRow
 			setEnd(endIndex+10)
 		}
-		console.log(selectedCell)
 	}
 
 
 	const updateRow = (rowIdx, row)=> {
 		if (typeof onRowsChange !== 'function') return;
 		if (row === rawRows[rowIdx]) return;
-		console.log("Adsfadsf")
 		const updatedRows = [...rawRows];
 		updatedRows[rowIdx] = row;
 		onRowsChange(updatedRows);
 	  }
+
 	const { idx: selectedIdx, rowIdx: selectedRowIdx } = selectedCell;
 
 	let result = [];
@@ -256,8 +245,6 @@ const DataGridTable = ({
 			);
 		}
 	}
-
-	
 	
 	return (
 		<>
@@ -277,7 +264,7 @@ const DataGridTable = ({
 					onColumnResize={handleColumnResizeLatest}
 					handleColumnsReorder={handleColumnsReorder}
 				/>				
-				{show && <div style={{ height: 40 }} className="table-add-newrow" >gopal</div>}
+				{show && <div style={{ height: 40 }} className="table-add-newrow shadow-md " >gopal</div>}
 				<div className="table-main-content" style={containerStyle}>
 					{result}
 				</div>
