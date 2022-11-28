@@ -55,6 +55,9 @@ const HeaderCell = (props) => {
 		elem.style.top = e.screenY
 		document.body.appendChild(elem);
 		e.dataTransfer.setDragImage(elem, 0, 0);
+		document.querySelectorAll(".table-cell").forEach((el) => {
+			el.classList.add("column-transition");
+		});
 		setIsDragging(position)
 	};
 
@@ -71,6 +74,9 @@ const HeaderCell = (props) => {
 		handleColumnsReorder(isDragging, position);
 		setIsDragging(null)
 		setIsOver(null)
+		document.querySelectorAll(".table-cell").forEach((el) => {
+			el.classList.remove("column-transition");
+		});
 	}
 	const lastPoint = { x: null, y: null }
 	const handleDragEvent = (e, position) => {

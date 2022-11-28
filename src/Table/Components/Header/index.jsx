@@ -2,7 +2,7 @@ import React, { memo, useState } from 'react'
 import HeaderCell from './HeaderCell';
 
 const Header = (props) => {
-	const { columns,height,onColumnResize,TotalColumnWidth,handleColumnsReorder} = props
+	const {headerRef, columns,height,onColumnResize,TotalColumnWidth,handleColumnsReorder} = props
 	const [isOver,setIsOver] = useState()
 	const [isDragging,setIsDragging] = useState()
 	const [prevDragOver,setPrevDragOver] = useState()
@@ -30,6 +30,7 @@ const Header = (props) => {
 
   return (
 	<div   
+	ref={headerRef}
 	role="Header"
 	aria-rowindex={1} 
 	className='table-header-container'

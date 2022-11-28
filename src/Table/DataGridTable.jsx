@@ -1,4 +1,5 @@
 import React, {useState } from 'react'
+import { useRef } from 'react';
 import { useEffect } from 'react';
 import { isCtrlKeyHeldDown, isSamePosition, scrollIntoView } from './CommonFunctions';
 import Header from './Components/Header';
@@ -28,6 +29,8 @@ const DataGridTable = ({
 	const [selectedCell, setSelectedCell] = useState(
 		initialPosition
 	);
+
+	const headerRef = useRef(null)
 	
 	const [totalVisibleRow,setTotalVisibleRow] =useState(30);
 	const [startRowIdx, setStart] = useState(0)
@@ -160,11 +163,6 @@ const DataGridTable = ({
 		const nextPosition = getNextPosition(key, ctrlKey, shiftKey);
 		if (isSamePosition(selectedCell, nextPosition)) return;
 		setSelectedCell(nextPosition);
-		console.log(nextPosition)
-		if(nextPosition.rowIdx==0){
-			tableRef.current.scrollTo(0,scrollLeft)
-		}
-		console.log(tableRef.current?.querySelector('[tabindex="0"]').getBoundingClientRect())
 		scrollIntoView(tableRef.current?.querySelector('[tabindex="0"]'));
 	}
 
@@ -206,6 +204,7 @@ const DataGridTable = ({
 	const handleScroll = (e) => {
 		const { scrollTop, scrollLeft } = tableRef.current
 		setScrollLeft(scrollLeft)
+		headerRef.current.scrollLeft=scrollLeft  ;
 		let currentIndx = Math.trunc(scrollTop / itemheight)
 		currentIndx = (currentIndx - totalVisibleRow) >= rawRows.length ? currentIndx - totalVisibleRow : currentIndx;
 		if (currentIndx !== startRowIdx) {
@@ -213,6 +212,7 @@ const DataGridTable = ({
 			const endIndex = ((currentIndx + totalVisibleRow) >= rawRows.length ? rawRows.length - 1 : currentIndx) + totalVisibleRow
 			setEnd(endIndex+10)
 		}
+		// console.log(startRowIdx,endRowIdx)
 	}
 
 
@@ -245,28 +245,31 @@ const DataGridTable = ({
 			);
 		}
 	}
-	
 	return (
 		<>
 			<div
-				ref={tableRef}
+				
 				className="viewPort"
-				style={{ height: "calc(100vh - 100px)" }}
-				onScroll={handleScroll}
+				style={{ height: "calc(100vh - 80px)" }}
+				// onScroll={handleScroll}
 				onKeyDown={handleKeyDown}
 				aria-colcount={columns.length}
 				aria-rowcount={rawRows.length}
 			>
+				<div className="AQ123" ref={headerRef}>
 				<Header
 					columns={viewportColumns}
 					TotalColumnWidth={TotalColumnWidth}
 					width="30"
 					onColumnResize={handleColumnResizeLatest}
 					handleColumnsReorder={handleColumnsReorder}
-				/>				
+				/>	
+				</div>			
 				{show && <div style={{ height: 40 }} className="table-add-newrow shadow-md " >gopal</div>}
-				<div className="table-main-content" style={containerStyle}>
+				<div className='abc' ref={tableRef}  onScroll={handleScroll}>
+					<div className="table-main-content" style={containerStyle} >
 					{result}
+				</div>
 				</div>
 			</div>
 			<button onClick={() => setShow(!show)}>add</button>
